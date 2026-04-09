@@ -35,9 +35,6 @@ const Navbar = () => {
                         </span>
                     </div>
 
-                    <ul className="links">
-                        <a href="#">Product</a>
-                    </ul>
                 </div>
 
                 <div className="actions">

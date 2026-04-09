@@ -116,7 +116,7 @@
                     @apply flex items-center space-x-2 cursor-pointer;
 
                     .logo {
-                        @apply w-7 h-7 text-primary transition-transform duration-500 group-hover:rotate-180;
+                        @apply w-7 h-7 text-primary transition-transform duration-500 hover:rotate-180;
                     }
 
                     .name {
@@ -152,10 +152,12 @@
     }
 
     .auth-modal {
-        @apply fixed inset-0 z-60 animate-in fade-in duration-300 flex items-center justify-center bg-black/80 backdrop-blur-md p-4;
+        @apply fixed inset-0 z-60 flex items-center justify-center bg-black/80 backdrop-blur-md p-4;
+        animation: fade-in 0.3s ease-out;
 
         .panel {
-            @apply bg-surface rounded-2xl shadow-2xl max-w-md w-full p-8 text-center border border-white/10 animate-in zoom-in-95 duration-300;
+            @apply bg-surface rounded-2xl shadow-2xl max-w-md w-full p-8 text-center border border-white/10;
+            animation: scale-in 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 
             .icon {
                 @apply w-16 h-16 bg-orange-500/10 rounded-full flex items-center justify-center mx-auto mb-6;
@@ -331,7 +333,8 @@
                 @apply relative bg-black/40 min-h-[500px] flex items-center justify-center;
 
                 .render-img {
-                    @apply w-full max-h-[700px] object-contain transition-all duration-1000 opacity-100 scale-100 animate-in fade-in zoom-in-95;
+                    @apply w-full max-h-[700px] object-contain transition-all duration-1000 opacity-100 scale-100;
+                    animation: scale-in 0.7s cubic-bezier(0.16, 1, 0.3, 1);
                 }
 
                 &.is-processing {
@@ -352,7 +355,8 @@
                     @apply absolute inset-0 flex flex-col items-center justify-center z-30 bg-black/40 backdrop-blur-md transition-opacity duration-500;
 
                     .rendering-card {
-                        @apply bg-surface/80 px-10 py-8 rounded-3xl border border-white/10 flex flex-col items-center shadow-premium backdrop-blur-xl animate-in zoom-in-90;
+                        @apply bg-surface/80 px-10 py-8 rounded-3xl border border-white/10 flex flex-col items-center shadow-premium backdrop-blur-xl;
+                        animation: scale-in 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 
                         .spinner {
                             @apply w-12 h-12 mb-6 animate-spin text-primary filter drop-shadow-[0_0_10px_rgba(249,115,22,0.5)];
@@ -398,7 +402,8 @@
             @apply pt-48 pb-32 px-6 max-w-7xl mx-auto flex flex-col items-center text-center;
 
             .announce {
-                @apply mb-10 inline-flex items-center px-4 py-2 rounded-full bg-white/5 border border-white/10 shadow-2xl backdrop-blur-sm animate-in slide-in-from-top-10 duration-1000;
+                @apply mb-10 inline-flex items-center px-4 py-2 rounded-full bg-white/5 border border-white/10 shadow-2xl backdrop-blur-sm;
+                animation: slide-down 1s cubic-bezier(0.16, 1, 0.3, 1);
 
                 .dot {
                     @apply w-2 h-2 rounded-full bg-blue-500 flex items-center justify-center mr-3 relative;
@@ -414,28 +419,36 @@
             }
 
             h1 {
-                @apply text-6xl md:text-9xl font-serif font-bold leading-[0.9] text-white mb-12 max-w-6xl mx-auto animate-in fade-in slide-in-from-bottom-20 duration-1000 delay-200 tracking-tight;
+                @apply text-6xl md:text-9xl font-serif font-bold leading-[0.9] text-white mb-12 max-w-6xl mx-auto tracking-tight opacity-0;
+                animation: slide-up 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
             }
 
             .subtitle {
-                @apply max-w-2xl mx-auto text-sm md:text-base font-medium tracking-wide text-zinc-400 mb-16 leading-relaxed animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-300;
+                @apply max-w-2xl mx-auto text-sm md:text-base font-medium tracking-wide text-zinc-400 mb-16 leading-relaxed opacity-0;
+                animation: slide-up 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
             }
 
             .actions {
-                @apply flex flex-col sm:flex-row gap-6 justify-center mb-24 animate-in fade-in slide-in-from-bottom-5 duration-1000 delay-500;
+                @apply flex flex-col sm:flex-row gap-6 justify-center mb-24 opacity-0;
+                animation: slide-up 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
 
                 .cta {
                     @apply inline-flex items-center justify-center rounded-full transition-all duration-300 px-12 py-5 text-sm uppercase tracking-[0.2em] font-black bg-primary text-white hover:bg-orange-600 shadow-2xl shadow-orange-500/30 hover:shadow-orange-500/40 active:scale-95;
 
                     .icon {
-                        @apply ml-3 w-5 h-5 transition-transform group-hover:translate-x-1;
+                        @apply ml-3 w-5 h-5 transition-transform;
+                    }
+
+                    &:hover .icon {
+                        @apply translate-x-1;
                     }
                 }
             }
 
             .upload-shell {
-                @apply w-full max-w-6xl mx-auto relative rounded-[3rem] overflow-hidden bg-white/[0.02] border border-white/10 p-4 md:p-8 shadow-premium min-h-[600px] flex items-center justify-center animate-in scale-95 opacity-0 duration-1000 delay-700 fill-mode-forwards;
+                @apply w-full max-w-6xl mx-auto relative rounded-[3rem] overflow-hidden bg-white/[0.02] border border-white/10 p-4 md:p-8 shadow-premium min-h-[600px] flex items-center justify-center;
                 animation: premium-reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards;
+                opacity: 0;
 
                 .grid-overlay {
                     @apply absolute inset-0 opacity-[0.03] pointer-events-none;
@@ -499,7 +512,7 @@
                     @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10;
 
                     .project-card {
-                        @apply relative bg-surface rounded-[2rem] overflow-hidden border border-white/5 shadow-2xl transition-all duration-500 cursor-pointer flex flex-col h-full hover:border-white/20 group hover:-translate-y-2;
+                        @apply relative bg-surface rounded-[2rem] overflow-hidden border border-white/5 shadow-2xl transition-all duration-500 cursor-pointer flex flex-col h-full hover:border-white/20 hover:-translate-y-2;
 
                         .preview {
                             @apply aspect-4/3 overflow-hidden bg-black/40 relative;
@@ -545,6 +558,26 @@
             }
         }
     }
+}
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes scale-in {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes slide-up {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slide-down {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
 }
 
 @keyframes premium-reveal {
