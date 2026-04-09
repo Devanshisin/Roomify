@@ -75,7 +75,7 @@ npm install
 
 This project runs magically inside the browser using Puter's Key-Value store and file hosting APIs, meaning there are absolutely **no environment variables** necessary to set up manually! All database components persist inside the `puter.kv` native APIs seamlessly.
 
-**Running the Project**
+**Running the Project** 
 
 ```bash
 npm run dev
