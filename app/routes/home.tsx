@@ -86,13 +86,9 @@ export default function Home() {
               </p>
 
               <div className="actions">
-                  <a href="#upload" className="cta">
+                  <a href="#upload" className="cta group">
                       Start Building <ArrowRight className="icon" />
                   </a>
-
-                  <Button variant="outline" size="lg" className="demo">
-                      Watch Demo
-                  </Button>
               </div>
 
               <div id="upload" className="upload-shell">

@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-    --color-background: #fdfbf7;
-    --color-foreground: #1a1a1a;
-    --color-surface: #ffffff;
-    --color-surface-highlight: #f3f4f6;
+    --color-background: #050505;
+    --color-foreground: #fafafa;
+    --color-surface: #111111;
+    --color-surface-highlight: #1a1a1a;
     --color-primary: #f97316;
     --color-secondary: #3b82f6;
     --color-accent: #8b5cf6;
     --font-serif: "Instrument Serif", serif;
     --font-sans: Inter, sans-serif;
-    --shadow-neobrutalism: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+    --shadow-premium: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
 
 @layer base {
@@ -19,8 +19,8 @@
     }
 
     body {
-        background-color: #fdfbf7;
-        color: #1a1a1a;
+        background-color: var(--color-background);
+        color: var(--color-foreground);
         font-family: Inter, sans-serif;
         -webkit-font-smoothing: antialiased;
     }
@@ -34,44 +34,44 @@
         font-family: "Instrument Serif", serif;
     }
 
-    /* Custom Scrollbar */
+    /* Custom Scrollbar for Dark Mode */
     ::-webkit-scrollbar {
         width: 8px;
         height: 8px;
     }
 
     ::-webkit-scrollbar-track {
-        background: #fdfbf7;
+        background: #050505;
     }
 
     ::-webkit-scrollbar-thumb {
-        background: #d1d5db;
+        background: #2a2a2a;
         border-radius: 4px;
     }
 
     ::-webkit-scrollbar-thumb:hover {
-        background: #9ca3af;
+        background: #3a3a3a;
     }
 }
 
 @layer components {
     .btn {
-        @apply inline-flex items-center justify-center rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background disabled:opacity-50 disabled:cursor-not-allowed;
+        @apply inline-flex items-center justify-center rounded-lg font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background disabled:opacity-50 disabled:cursor-not-allowed;
 
         &.btn--primary {
-            @apply bg-primary text-white hover:bg-[#EA580C] shadow-sm;
+            @apply bg-primary text-white hover:bg-orange-600 shadow-lg shadow-orange-500/20 active:scale-95;
         }
 
         &.btn--secondary {
-            @apply bg-white text-black border border-zinc-200 hover:bg-zinc-50 shadow-sm;
+            @apply bg-surface text-foreground border border-white/10 hover:bg-surface-highlight shadow-sm active:scale-95;
         }
 
         &.btn--ghost {
-            @apply text-zinc-600 hover:text-black hover:bg-black/5;
+            @apply text-zinc-400 hover:text-white hover:bg-white/5;
         }
 
         &.btn--outline {
-            @apply bg-transparent border border-zinc-300 text-zinc-900 hover:bg-zinc-100;
+            @apply bg-transparent border border-white/20 text-white hover:bg-white/5;
         }
 
         &.btn--sm {
@@ -92,7 +92,7 @@
     }
 
     .card {
-        @apply bg-surface border border-white/5 rounded-3xl p-6 shadow-xl;
+        @apply bg-surface border border-white/10 rounded-3xl p-6 shadow-2xl transition-all duration-500 hover:border-white/20;
 
         .header {
             @apply flex justify-between items-center mb-4;
@@ -104,88 +104,84 @@
     }
 
     .navbar {
-        @apply fixed top-0 w-full z-50 bg-background/90 backdrop-blur-sm border-b border-black/5;
+        @apply fixed top-0 w-full z-50 bg-black/40 backdrop-blur-xl border-b border-white/5 transition-all duration-300;
 
         .inner {
-            @apply max-w-7xl mx-auto px-6 h-16 flex items-center justify-between;
+            @apply max-w-7xl mx-auto px-6 h-20 flex items-center justify-between;
 
             .left {
-                @apply flex items-center space-x-8;
+                @apply flex items-center space-x-12;
 
                 .brand {
                     @apply flex items-center space-x-2 cursor-pointer;
 
                     .logo {
-                        @apply w-6 h-6 text-black;
+                        @apply w-7 h-7 text-primary transition-transform duration-500 group-hover:rotate-180;
                     }
 
                     .name {
-                        @apply text-xl font-serif font-bold text-black tracking-tight;
+                        @apply text-2xl font-serif font-bold text-white tracking-tight;
                     }
                 }
 
                 .links {
-                    @apply hidden md:flex items-center space-x-6;
+                    @apply hidden md:flex items-center space-x-8;
 
                     a {
-                        @apply text-sm font-medium text-zinc-600 hover:text-black transition-colors;
+                        @apply text-sm font-medium text-zinc-400 hover:text-white transition-all relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all hover:after:w-full;
                     }
                 }
             }
 
             .actions {
-                @apply flex items-center space-x-4;
+                @apply flex items-center space-x-6;
 
                 .greeting {
-                    @apply text-xs font-semibold uppercase tracking-wide text-zinc-500;
-                }
-
-                .btn {
-                    @apply rounded-md;
+                    @apply text-xs font-semibold uppercase tracking-widest text-zinc-500;
                 }
 
                 .login {
-                    @apply text-xs font-bold uppercase tracking-wide text-zinc-900 hover:text-primary transition-colors;
+                    @apply text-xs font-bold uppercase tracking-widest text-zinc-400 hover:text-white transition-colors;
                 }
 
                 .cta {
-                    @apply inline-flex items-center justify-center rounded-md font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background disabled:opacity-50 disabled:cursor-not-allowed px-3 py-1.5 text-xs uppercase tracking-wide bg-primary text-white hover:bg-[#EA580C] shadow-sm;
+                    @apply inline-flex items-center justify-center rounded-full font-bold transition-all duration-300 px-6 py-2 text-xs uppercase tracking-widest bg-primary text-white hover:bg-orange-600 shadow-xl shadow-orange-500/20 active:scale-95;
                 }
             }
         }
     }
 
     .auth-modal {
-        @apply absolute inset-0 z-60 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4;
+        @apply fixed inset-0 z-60 animate-in fade-in duration-300 flex items-center justify-center bg-black/80 backdrop-blur-md p-4;
 
         .panel {
-            @apply bg-white rounded-xl shadow-2xl max-w-md w-full p-6 text-center border border-zinc-200;
+            @apply bg-surface rounded-2xl shadow-2xl max-w-md w-full p-8 text-center border border-white/10 animate-in zoom-in-95 duration-300;
 
             .icon {
-                @apply w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4;
+                @apply w-16 h-16 bg-orange-500/10 rounded-full flex items-center justify-center mx-auto mb-6;
 
                 .alert {
-                    @apply text-primary w-6 h-6;
+                    @apply text-primary w-8 h-8;
                 }
             }
 
             h3 {
-                @apply text-xl font-serif font-bold text-black mb-2;
+                @apply text-2xl font-serif font-bold text-white mb-3;
             }
 
             p {
-                @apply text-zinc-600 text-sm mb-6 leading-relaxed;
+                @apply text-zinc-400 text-sm mb-8 leading-relaxed;
             }
 
             .actions {
-                @apply flex flex-col space-y-3;
+                @apply flex flex-col space-y-4;
 
                 .confirm {
-                    @apply bg-primary hover:bg-orange-600 text-white;
+                    @apply bg-primary hover:bg-orange-600 text-white py-3 rounded-xl font-bold uppercase tracking-widest text-xs;
                 }
 
                 .cancel {
-                    @apply text-xs text-zinc-400 hover:text-black mt-2;
+                    @apply text-xs text-zinc-500 hover:text-white transition-colors;
                 }
             }
         }
@@ -195,13 +191,13 @@
         @apply w-full;
 
         .dropzone {
-            @apply relative h-48 rounded-xl border-2 border-dashed transition-all duration-300 flex flex-col items-center justify-center cursor-pointer bg-zinc-50 border-zinc-200 hover:border-zinc-300 hover:bg-zinc-100;
+            @apply relative h-64 rounded-3xl border-2 border-dashed transition-all duration-500 flex flex-col items-center justify-center cursor-pointer bg-white/5 border-white/10 hover:border-primary/50 hover:bg-white/10 overflow-hidden;
 
             &.is-dragging {
-                @apply border-primary bg-orange-50;
+                @apply border-primary bg-primary/10;
 
                 .drop-icon {
-                    @apply bg-orange-100 text-primary;
+                    @apply bg-primary text-white scale-110;
                 }
             }
 
@@ -210,79 +206,79 @@
             }
 
             .drop-content {
-                @apply flex flex-col items-center pointer-events-none;
+                @apply flex flex-col items-center pointer-events-none transition-transform duration-500;
 
                 .drop-icon {
-                    @apply w-12 h-12 rounded-full flex items-center justify-center mb-4 transition-colors bg-zinc-200 text-zinc-500;
+                    @apply w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-all bg-white/10 text-zinc-400 group-hover:text-primary;
                 }
 
                 p {
-                    @apply text-zinc-900 font-bold text-sm mb-1;
+                    @apply text-white font-bold text-lg mb-2;
                 }
 
                 .help {
-                    @apply text-zinc-500 text-xs;
+                    @apply text-zinc-500 text-sm;
                 }
             }
 
-            &:not(.is-dragging):hover .drop-icon {
-                @apply bg-zinc-300 text-black;
+            &:hover .drop-content {
+                @apply scale-105;
             }
         }
 
         .upload-status {
-            @apply h-48 rounded-xl border border-zinc-200 bg-white p-6 flex flex-col justify-center relative overflow-hidden;
+            @apply h-64 rounded-3xl border border-white/10 bg-surface p-8 flex flex-col justify-center relative overflow-hidden;
 
             .status-content {
                 @apply relative z-10 flex flex-col items-center justify-center text-center;
 
                 .status-icon {
-                    @apply w-12 h-12 rounded-lg bg-zinc-100 flex items-center justify-center text-black mb-3 border border-zinc-200;
+                    @apply w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center text-white mb-4 border border-white/10;
 
                     .check {
-                        @apply text-green-500;
+                        @apply text-green-500 w-8 h-8;
                     }
                 }
 
                 h3 {
-                    @apply text-black font-bold text-sm truncate max-w-full px-4;
+                    @apply text-white font-bold text-lg truncate max-w-full px-4;
                 }
 
                 .progress {
-                    @apply w-full max-w-50 h-1.5 bg-zinc-100 rounded-full mt-3 overflow-hidden;
+                    @apply w-full max-w-xs h-2 bg-white/5 rounded-full mt-6 overflow-hidden;
 
                     .bar {
-                        @apply h-full bg-primary transition-all duration-300 ease-out;
+                        @apply h-full bg-primary transition-all duration-500 ease-out shadow-[0_0_20px_rgba(249,115,22,0.5)];
                     }
                 }
 
                 .status-text {
-                    @apply text-zinc-500 text-xs font-mono uppercase mt-2;
+                    @apply text-zinc-500 text-xs font-mono uppercase mt-4 tracking-widest;
                 }
             }
         }
     }
 
     .visualizer {
-        @apply min-h-screen bg-background pt-6 pb-10 px-4 md:px-6 flex flex-col items-center font-sans relative;
+        @apply min-h-screen bg-background pt-10 pb-20 px-4 md:px-8 flex flex-col items-center font-sans relative;
 
         .topbar {
-            @apply w-full max-w-6xl flex items-center justify-between mb-6 px-2;
+            @apply w-full max-w-7xl flex items-center justify-between mb-10 px-4;
 
             .brand {
-                @apply flex items-center space-x-2 cursor-pointer;
+                @apply flex items-center space-x-3 cursor-pointer;
 
                 .logo {
-                    @apply w-6 h-6 text-black;
+                    @apply w-8 h-8 text-primary shadow-[0_0_15px_rgba(249,115,22,0.3)];
                 }
 
                 .name {
-                    @apply text-xl font-serif font-bold text-black tracking-tight;
+                    @apply text-2xl font-serif font-bold text-white tracking-tight;
                 }
             }
 
             .exit {
-                @apply text-zinc-500 hover:text-black hover:bg-zinc-100;
+                @apply text-zinc-400 hover:text-white hover:bg-white/10 rounded-full px-6 transition-all;
 
                 .icon {
                     @apply w-5 h-5 mr-2;
@@ -291,105 +287,101 @@
         }
 
         .content {
-            @apply w-full max-w-6xl grid grid-cols-1 gap-6;
+            @apply w-full max-w-7xl grid grid-cols-1 gap-12 lg:gap-16;
         }
 
         .panel {
-            @apply bg-white rounded-xl border border-zinc-200 shadow-2xl overflow-hidden;
+            @apply bg-surface rounded-[2.5rem] border border-white/10 shadow-premium overflow-hidden transition-all duration-500 hover:border-white/20;
 
             .panel-header {
-                @apply flex flex-col md:flex-row md:items-center md:justify-between gap-4 p-5 border-b border-zinc-100;
+                @apply flex flex-col md:flex-row md:items-center md:justify-between gap-6 p-10 border-b border-white/5;
 
                 .panel-meta {
                     p {
-                        @apply text-xs font-mono uppercase tracking-widest text-zinc-400;
+                        @apply text-xs font-mono uppercase tracking-[0.3em] text-zinc-500 mb-2;
                     }
 
                     h2 {
-                        @apply text-2xl font-serif font-bold text-black;
+                        @apply text-4xl font-serif font-bold text-white leading-tight;
                     }
 
                     h3 {
-                        @apply text-lg font-serif font-bold text-black;
+                        @apply text-2xl font-serif font-bold text-white;
                     }
 
                     .note {
-                        @apply text-xs text-zinc-500 mt-1;
+                        @apply text-sm text-zinc-600 mt-2 font-medium;
                     }
                 }
 
                 .panel-actions {
-                    @apply flex flex-wrap items-center gap-3;
+                    @apply flex flex-wrap items-center gap-4;
 
                     .export {
-                        @apply bg-primary text-white hover:bg-orange-600 h-9 border-none shadow-sm;
+                        @apply bg-primary text-white hover:bg-orange-600 h-12 px-8 rounded-full border-none shadow-xl shadow-orange-500/20 active:scale-95 transition-all;
                     }
 
                     .share {
-                        @apply bg-black text-white h-9 shadow-sm hover:bg-zinc-800;
+                        @apply bg-white/10 text-white h-12 px-8 rounded-full shadow-lg hover:bg-white/15 active:scale-95 transition-all;
                     }
                 }
             }
 
             .render-area {
-                @apply relative bg-zinc-100 min-h-105;
+                @apply relative bg-black/40 min-h-[500px] flex items-center justify-center;
 
                 .render-img {
-                    @apply w-full h-full object-contain transition-all duration-700 opacity-100 scale-100;
+                    @apply w-full max-h-[700px] object-contain transition-all duration-1000 opacity-100 scale-100 animate-in fade-in zoom-in-95;
                 }
 
                 &.is-processing {
                     .render-img {
-                        @apply opacity-50 blur-sm scale-105;
+                        @apply opacity-30 blur-xl scale-110;
                     }
                 }
 
                 .render-placeholder {
-                    @apply w-full h-full flex items-center justify-center;
+                    @apply w-full h-full flex items-center justify-center opacity-40;
                 }
 
                 .render-fallback {
-                    @apply w-full h-full object-contain opacity-50;
+                    @apply w-full h-full max-h-[600px] object-contain opacity-50 grayscale;
                 }
 
                 .render-overlay {
-                    @apply absolute inset-0 flex flex-col items-center justify-center z-30 bg-white/60 backdrop-blur-sm transition-opacity duration-300;
+                    @apply absolute inset-0 flex flex-col items-center justify-center z-30 bg-black/40 backdrop-blur-md transition-opacity duration-500;
 
                     .rendering-card {
-                        @apply bg-white px-6 py-4 rounded-xl border border-zinc-200 flex flex-col items-center shadow-2xl;
+                        @apply bg-surface/80 px-10 py-8 rounded-3xl border border-white/10 flex flex-col items-center shadow-premium backdrop-blur-xl animate-in zoom-in-90;
 
                         .spinner {
-                            @apply w-8 h-8 mb-3 animate-spin text-primary;
+                            @apply w-12 h-12 mb-6 animate-spin text-primary filter drop-shadow-[0_0_10px_rgba(249,115,22,0.5)];
                         }
 
                         .title {
-                            @apply text-sm font-bold text-black;
+                            @apply text-xl font-bold text-white tracking-wide;
                         }
 
                         .subtitle {
-                            @apply text-xs text-zinc-500 mt-1;
+                            @apply text-sm text-zinc-500 mt-2 text-center max-w-[200px];
                         }
                     }
                 }
             }
 
             &.compare {
-                @apply shadow-xl;
+                @apply shadow-premium;
 
                 .panel-header {
                     @apply flex items-center justify-between;
 
                     .hint {
-                        @apply text-xs text-zinc-400;
+                        @apply text-xs font-mono text-zinc-400 uppercase tracking-widest bg-white/5 py-2 px-4 rounded-full;
                     }
                 }
 
                 .compare-stage {
-                    @apply relative bg-zinc-100 overflow-hidden;
-                }
-
-                .compare-fallback {
-                    @apply flex items-center justify-center;
+                    @apply relative bg-black/20 overflow-hidden;
                 }
 
                 .compare-img {
@@ -400,84 +392,81 @@
     }
 
     .home {
-        @apply min-h-screen bg-background relative overflow-x-hidden text-foreground;
+        @apply min-h-screen bg-background relative overflow-x-hidden text-foreground selection:bg-primary/30;
 
         .hero {
-            @apply pt-32 pb-20 px-6 max-w-7xl mx-auto flex flex-col items-center text-center;
+            @apply pt-48 pb-32 px-6 max-w-7xl mx-auto flex flex-col items-center text-center;
 
             .announce {
-                @apply mb-8 inline-flex items-center px-3 py-1 rounded-md bg-white border border-zinc-200 shadow-sm;
+                @apply mb-10 inline-flex items-center px-4 py-2 rounded-full bg-white/5 border border-white/10 shadow-2xl backdrop-blur-sm animate-in slide-in-from-top-10 duration-1000;
 
                 .dot {
-                    @apply w-4 h-4 rounded bg-blue-100 flex items-center justify-center mr-2;
+                    @apply w-2 h-2 rounded-full bg-blue-500 flex items-center justify-center mr-3 relative;
 
-                    .pulse {
-                        @apply w-2 h-2 rounded-full bg-blue-500 animate-pulse;
+                    &::after {
+                        @apply content-[''] absolute inset-[-4px] rounded-full bg-blue-500/40 animate-ping;
                     }
                 }
 
                 p {
-                    @apply text-[10px] font-bold uppercase tracking-widest text-zinc-600;
+                    @apply text-[10px] font-bold uppercase tracking-[0.4em] text-zinc-400;
                 }
             }
 
             h1 {
-                @apply text-6xl md:text-8xl font-serif leading-[0.95] text-black mb-8 max-w-5xl mx-auto;
+                @apply text-6xl md:text-9xl font-serif font-bold leading-[0.9] text-white mb-12 max-w-6xl mx-auto animate-in fade-in slide-in-from-bottom-20 duration-1000 delay-200 tracking-tight;
             }
 
             .subtitle {
-                @apply max-w-2xl mx-auto text-xs md:text-sm font-mono uppercase tracking-widest text-zinc-500 mb-10 leading-relaxed;
+                @apply max-w-2xl mx-auto text-sm md:text-base font-medium tracking-wide text-zinc-400 mb-16 leading-relaxed animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-300;
             }
 
             .actions {
-                @apply flex flex-col sm:flex-row gap-4 justify-center mb-16;
+                @apply flex flex-col sm:flex-row gap-6 justify-center mb-24 animate-in fade-in slide-in-from-bottom-5 duration-1000 delay-500;
 
                 .cta {
-                    @apply inline-flex items-center justify-center rounded-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background px-8 py-3 text-sm uppercase tracking-wide font-bold bg-primary text-white hover:bg-[#ea580c] shadow-md;
+                    @apply inline-flex items-center justify-center rounded-full transition-all duration-300 px-12 py-5 text-sm uppercase tracking-[0.2em] font-black bg-primary text-white hover:bg-orange-600 shadow-2xl shadow-orange-500/30 hover:shadow-orange-500/40 active:scale-95;
 
                     .icon {
-                        @apply ml-2 w-4 h-4;
+                        @apply ml-3 w-5 h-5 transition-transform group-hover:translate-x-1;
                     }
-                }
-
-                .demo {
-                    @apply px-8 bg-white rounded-md hover:bg-zinc-50;
                 }
             }
 
             .upload-shell {
-                @apply w-full max-w-5xl mx-auto relative rounded-3xl overflow-hidden bg-linear-to-b from-blue-100/50 to-white/50 border border-blue-100 p-6 md:p-12 shadow-sm min-h-100 flex items-center justify-center;
+                @apply w-full max-w-6xl mx-auto relative rounded-[3rem] overflow-hidden bg-white/[0.02] border border-white/10 p-4 md:p-8 shadow-premium min-h-[600px] flex items-center justify-center animate-in scale-95 opacity-0 duration-1000 delay-700 fill-mode-forwards;
+                animation: premium-reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards;
 
                 .grid-overlay {
-                    @apply absolute inset-0 opacity-40 pointer-events-none;
+                    @apply absolute inset-0 opacity-[0.03] pointer-events-none;
 
                     background-image:
-                            linear-gradient(#3b82f6 1px, transparent 1px),
-                            linear-gradient(90deg, #3b82f6 1px, transparent 1px);
+                            linear-gradient(white 1px, transparent 1px),
+                            linear-gradient(90deg, white 1px, transparent 1px);
 
-                    background-size: 60px 60px;
+                    background-size: 80px 80px;
                 }
 
                 .upload-card {
-                    @apply relative w-full max-w-xl bg-white rounded-2xl shadow-xl overflow-hidden border border-zinc-100 p-8 z-10 transition-transform hover:scale-[1.01] duration-500;
+                    @apply relative w-full max-w-2xl bg-surface/60 backdrop-blur-2xl rounded-[2.5rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] overflow-hidden border border-white/10 p-12 z-10 transition-all duration-700 hover:border-white/20;
 
                     .upload-head {
-                        @apply text-center mb-6;
+                        @apply text-center mb-10;
 
                         .upload-icon {
-                            @apply w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-3;
+                            @apply w-20 h-20 bg-primary/10 rounded-3xl flex items-center justify-center mx-auto mb-6 transition-transform hover:rotate-6 duration-500;
 
                             .icon {
-                                @apply text-orange-500 w-6 h-6;
+                                @apply text-primary w-10 h-10;
                             }
                         }
 
                         h3 {
-                            @apply text-xl font-serif font-bold text-black;
+                            @apply text-3xl font-serif font-bold text-white mb-2;
                         }
 
                         p {
-                            @apply text-zinc-500 text-sm mt-1;
+                            @apply text-zinc-500 text-base;
                         }
                     }
                 }
@@ -485,115 +474,86 @@
         }
 
         .projects {
-            @apply py-24 bg-white relative border-b border-zinc-100;
+            @apply py-32 bg-black relative border-t border-white/5;
 
             .section-inner {
                 @apply max-w-7xl mx-auto px-6;
 
                 .section-head {
-                    @apply flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6;
+                    @apply flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8;
 
                     .copy {
                         @apply max-w-2xl;
 
                         h2 {
-                            @apply text-4xl font-serif text-black mb-4;
+                            @apply text-5xl md:text-6xl font-serif font-bold text-white mb-6;
                         }
 
                         p {
-                            @apply text-zinc-500 text-lg;
+                            @apply text-zinc-500 text-xl font-medium;
                         }
                     }
                 }
 
-                .loading {
-                    @apply flex items-center justify-center text-sm text-zinc-500;
-                }
-
                 .projects-grid {
-                    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8;
+                    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10;
 
                     .project-card {
-                        @apply relative bg-white rounded-xl overflow-hidden border border-zinc-200 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col h-full;
+                        @apply relative bg-surface rounded-[2rem] overflow-hidden border border-white/5 shadow-2xl transition-all duration-500 cursor-pointer flex flex-col h-full hover:border-white/20 group hover:-translate-y-2;
 
                         .preview {
-                            @apply aspect-4/3 overflow-hidden bg-zinc-100 relative;
+                            @apply aspect-4/3 overflow-hidden bg-black/40 relative;
 
                             img {
-                                @apply w-full h-full object-cover group-hover:scale-105 transition-transform duration-700;
+                                @apply w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110;
                             }
 
                             .badge {
-                                @apply absolute top-3 left-3 bg-white/90 backdrop-blur-md px-2 py-1 rounded-md border border-zinc-200 shadow-sm;
+                                @apply absolute top-5 left-5 bg-black/60 backdrop-blur-xl px-4 py-1.5 rounded-full border border-white/10 shadow-2xl;
 
                                 span {
-                                    @apply text-[10px] font-bold uppercase tracking-wider text-zinc-800;
+                                    @apply text-[10px] font-black uppercase tracking-[0.2em] text-white;
                                 }
                             }
                         }
 
                         .card-body {
-                            @apply p-5 flex justify-between items-center bg-white border-t border-zinc-100 grow;
+                            @apply p-8 flex justify-between items-center bg-surface border-t border-white/5 grow;
 
                             h3 {
-                                @apply text-lg font-serif font-bold text-zinc-900 group-hover:text-primary transition-colors;
+                                @apply text-2xl font-serif font-bold text-white group-hover:text-primary transition-colors;
                             }
 
                             .meta {
-                                @apply flex items-center text-zinc-400 text-xs mt-1 space-x-2;
+                                @apply flex items-center text-zinc-500 text-xs mt-2 space-x-3;
 
                                 span {
-                                    @apply font-mono uppercase;
+                                    @apply font-mono uppercase tracking-widest;
                                 }
 
                                 span:last-child {
-                                    @apply text-zinc-400 text-[10px] uppercase tracking-wide;
+                                    @apply text-zinc-600;
                                 }
                             }
 
                             .arrow {
-                                @apply w-10 h-10 rounded-full bg-zinc-50 border border-zinc-200 flex items-center justify-center text-zinc-400 group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all duration-300;
+                                @apply w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-zinc-500 group-hover:bg-primary group-hover:text-white group-hover:border-primary group-hover:rotate-45 transition-all duration-500;
                             }
                         }
-                    }
-
-                    .empty {
-                        @apply col-span-full rounded-xl border border-dashed border-zinc-200 bg-zinc-50 p-10 text-center text-sm text-zinc-500;
-                    }
-                }
-            }
-        }
-
-        .partners {
-            @apply border-t border-zinc-200 py-12 bg-white;
-
-            .section-inner {
-                @apply max-w-7xl mx-auto px-6;
-
-                .logos {
-                    @apply grid grid-cols-2 md:grid-cols-5 gap-8 items-center opacity-60 grayscale hover:grayscale-0 transition-all duration-500;
-                }
-
-                .logo-item {
-                    @apply flex items-center justify-center space-x-2 cursor-pointer;
-
-                    div {
-                        @apply text-zinc-800 group-hover:text-black transition-colors;
-                    }
-
-                    span {
-                        @apply font-bold text-xl text-zinc-800 group-hover:text-black transition-colors tracking-tight;
                     }
                 }
             }
         }
     }
+}
 
-    .visualizer-route {
-        @apply min-h-screen flex items-center justify-center;
-
-        &.loading {
-            @apply text-sm text-zinc-500;
-        }
+@keyframes premium-reveal {
+    from {
+        transform: translateY(40px) scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
     }
 }
