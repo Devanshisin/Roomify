@@ -304,7 +304,7 @@
                     }
 
                     h2 {
-                        @apply text-4xl font-serif font-bold text-white leading-tight;
+                        @apply text-3xl font-serif font-bold text-white leading-tight;
                     }
 
                     h3 {
@@ -419,12 +419,12 @@
             }
 
             h1 {
-                @apply text-6xl md:text-9xl font-serif font-bold leading-[0.9] text-white mb-12 max-w-6xl mx-auto tracking-tight opacity-0;
+                @apply text-4xl md:text-7xl font-serif font-bold leading-[0.9] text-white mb-12 max-w-6xl mx-auto tracking-tight opacity-0;
                 animation: slide-up 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
             }
 
             .subtitle {
-                @apply max-w-2xl mx-auto text-sm md:text-base font-medium tracking-wide text-zinc-400 mb-16 leading-relaxed opacity-0;
+                @apply max-w-2xl mx-auto text-sm font-medium tracking-wide text-zinc-400 mb-16 leading-relaxed opacity-0;
                 animation: slide-up 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
             }
 
@@ -499,7 +499,7 @@
                         @apply max-w-2xl;
 
                         h2 {
-                            @apply text-5xl md:text-6xl font-serif font-bold text-white mb-6;
+                            @apply text-4xl md:text-5xl font-serif font-bold text-white mb-6;
                         }
 
                         p {
@@ -534,7 +534,7 @@
                             @apply p-8 flex justify-between items-center bg-surface border-t border-white/5 grow;
 
                             h3 {
-                                @apply text-2xl font-serif font-bold text-white group-hover:text-primary transition-colors;
+                                @apply text-xl font-serif font-bold text-white group-hover:text-primary transition-colors;
                             }
 
                             .meta {
